@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bambi Cafe</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#FBEAF0;
+    --pink-mid:#F4C0D1;
+    --pink-deep:#D4537E;
+    --lav:#EEEDFE;
+    --lav-mid:#CECBF6;
+    --lav-deep:#7F77DD;
+    --mint:#E1F5EE;
+    --mint-mid:#9FE1CB;
+    --mint-deep:#1D9E75;
+    --cream:#FFF8F2;
+    --text:#5A4A52;
+    --text-soft:#9A8893;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Quicksand',sans-serif;
+    background:var(--cream);
+    color:var(--text);
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Baloo 2',cursive;font-weight:700;color:var(--pink-deep);}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 24px;max-width:1100px;margin:0 auto;
+  }
+  .logo{font-family:'Baloo 2',cursive;font-size:28px;font-weight:700;color:var(--pink-deep);display:flex;align-items:center;gap:8px;}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{color:var(--text);text-decoration:none;font-weight:600;font-size:15px;transition:color .2s;}
+  .nav-links a:hover{color:var(--pink-deep);}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    background:linear-gradient(180deg,var(--lav) 0%, var(--pink) 100%);
+    border-radius:32px;
+    margin:12px;
+    padding:70px 24px 90px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .sparkle{position:absolute;font-size:22px;opacity:.6;}
+  .hero h1{font-size:56px;letter-spacing:1px;}
+  .hero p.tag{font-size:20px;color:var(--text-soft);margin:14px 0 30px;font-weight:600;}
+  .hero-chibi{width:180px;margin:0 auto 26px;}
+  .btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn{
+    font-family:'Baloo 2',cursive;font-weight:600;font-size:17px;
+    padding:14px 32px;border-radius:50px;border:none;cursor:pointer;
+    transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--pink-deep);color:#fff;}
+  .btn-secondary{background:#fff;color:var(--pink-deep);border:2px solid var(--pink-mid);}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(212,83,126,.25);}
+
+  /* ABOUT */
+  .about{
+    display:flex;align-items:center;gap:48px;padding:80px 24px;
+    max-width:1100px;margin:0 auto;
+  }
+  .about-img{flex:0 0 260px;}
+  .about-text{flex:1;}
+  .about-text h2{font-size:34px;margin-bottom:16px;}
+  .about-text p{font-size:17px;color:var(--text-soft);}
+  .badge-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+  .badge{
+    background:var(--mint);color:var(--mint-deep);font-weight:600;font-size:13px;
+    padding:8px 16px;border-radius:50px;
+  }
+
+  /* MENU */
+  .menu-section{padding:60px 24px;text-align:center;}
+  .menu-section h2{font-size:34px;margin-bottom:8px;}
+  .menu-section .sub{color:var(--text-soft);margin-bottom:40px;font-weight:600;}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;max-width:1100px;margin:0 auto;}
+  .menu-card{
+    background:#fff;border-radius:24px;padding:24px;text-align:center;
+    border:2px solid var(--lav);transition:transform .2s, border-color .2s;
+  }
+  .menu-card:hover{transform:translateY(-6px);border-color:var(--pink-mid);}
+  .menu-card .icon{width:80px;height:80px;margin:0 auto 12px;}
+  .menu-card h3{font-size:19px;color:var(--text);margin-bottom:6px;}
+  .menu-card .price{color:var(--pink-deep);font-weight:700;font-size:16px;margin-bottom:8px;}
+  .menu-card p{font-size:14px;color:var(--text-soft);}
+
+  /* GALLERY */
+  .gallery{background:var(--lav);border-radius:32px;margin:12px;padding:70px 24px;text-align:center;}
+  .gallery h2{font-size:34px;margin-bottom:8px;}
+  .gallery .sub{color:var(--lav-deep);margin-bottom:40px;font-weight:600;}
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;max-width:1000px;margin:0 auto;}
+  .polaroid{
+    background:#fff;border-radius:12px;padding:12px 12px 36px;
+    box-shadow:0 4px 12px rgba(127,119,221,.15);
+    transform:rotate(var(--r,0deg));position:relative;
+  }
+  .polaroid:nth-child(1){--r:-3deg;}
+  .polaroid:nth-child(2){--r:2deg;}
+  .polaroid:nth-child(3){--r:-1deg;}
+  .polaroid:nth-child(4){--r:3deg;}
+  .polaroid .frame{
+    width:100%;aspect-ratio:1/1;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .polaroid figcaption{
+    font-family:'Baloo 2',cursive;font-size:13px;color:var(--text-soft);
+    margin-top:10px;text-align:center;
+  }
+
+  /* VISIT */
+  .visit{padding:80px 24px;max-width:1100px;margin:0 auto;display:flex;gap:48px;flex-wrap:wrap;}
+  .visit-info{flex:1;min-width:260px;}
+  .visit-info h2{font-size:34px;margin-bottom:20px;}
+  .info-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;}
+  .info-row .ic{font-size:22px;}
+  .info-row p{margin:0;}
+  .info-row .label{font-weight:700;color:var(--text);}
+  .info-row .detail{color:var(--text-soft);font-size:15px;}
+  .map-box{
+    flex:1;min-width:260px;background:var(--mint);border-radius:24px;
+    display:flex;align-items:center;justify-content:center;min-height:240px;
+    color:var(--mint-deep);font-weight:600;font-family:'Baloo 2',cursive;font-size:18px;
+  }
+  .social-row{display:flex;gap:14px;margin-top:24px;}
+  .social-pill{
+    background:var(--pink);color:var(--pink-deep);font-weight:600;font-size:14px;
+    padding:10px 20px;border-radius:50px;
+  }
+
+  /* FOOTER */
+  footer{text-align:center;padding:40px 24px 50px;color:var(--text-soft);font-size:14px;}
+  footer .foot-chibi{width:70px;margin:0 auto 12px;}
+  .divider{
+    height:2px;background:repeating-linear-gradient(90deg,var(--pink-mid) 0 10px, transparent 10px 20px);
+    max-width:300px;margin:0 auto 24px;
+  }
+
+  @media(max-width:720px){
+    .hero h1{font-size:38px;}
+    .about{flex-direction:column;text-align:center;}
+    .nav-links{display:none;}
+    .visit{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#F4C0D1"/><ellipse cx="35" cy="35" rx="10" ry="14" fill="#FBEAF0" transform="rotate(-20 35 35)"/><ellipse cx="65" cy="35" rx="10" ry="14" fill="#FBEAF0" transform="rotate(20 65 35)"/><circle cx="40" cy="55" r="4" fill="#5A4A52"/><circle cx="60" cy="55" r="4" fill="#5A4A52"/><ellipse cx="50" cy="68" rx="6" ry="4" fill="#D4537E"/></svg>
+    Bambi Cafe
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <span class="sparkle" style="top:30px;left:8%;">✦</span>
+  <span class="sparkle" style="top:60px;right:12%;">✧</span>
+  <span class="sparkle" style="top:140px;left:18%;">✦</span>
+  <span class="sparkle" style="top:100px;right:22%;">★</span>
+
+  <svg class="hero-chibi" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="170" rx="55" ry="14" fill="#D4537E" opacity="0.12"/>
+    <ellipse cx="60" cy="40" rx="14" ry="22" fill="#7F77DD" transform="rotate(-25 60 40)"/>
+    <ellipse cx="140" cy="40" rx="14" ry="22" fill="#7F77DD" transform="rotate(25 140 40)"/>
+    <circle cx="100" cy="90" r="55" fill="#FFF8F2"/>
+    <circle cx="80" cy="85" r="6" fill="#5A4A52"/>
+    <circle cx="120" cy="85" r="6" fill="#5A4A52"/>
+    <circle cx="65" cy="95" r="8" fill="#F4C0D1" opacity="0.7"/>
+    <circle cx="135" cy="95" r="8" fill="#F4C0D1" opacity="0.7"/>
+    <path d="M85 105 Q100 115 115 105" stroke="#D4537E" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="78" y="135" width="44" height="40" rx="8" fill="#9FE1CB"/>
+    <rect x="78" y="135" width="44" height="10" rx="4" fill="#5DCAA5"/>
+    <ellipse cx="100" cy="135" rx="22" ry="6" fill="#E1F5EE"/>
+  </svg>
+
+  <h1>Bambi Cafe</h1>
+  <p class="tag">soft drinks, softer vibes ✿</p>
+  <div class="btn-row">
+    <button class="btn btn-primary">Order now</button>
+    <button class="btn btn-secondary">See menu</button>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-img">
+    <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="110" cy="110" r="105" fill="#EEEDFE"/>
+      <ellipse cx="80" cy="55" rx="13" ry="20" fill="#CECBF6" transform="rotate(-20 80 55)"/>
+      <ellipse cx="140" cy="55" rx="13" ry="20" fill="#CECBF6" transform="rotate(20 140 55)"/>
+      <circle cx="110" cy="100" r="50" fill="#FFF8F2"/>
+      <circle cx="92" cy="96" r="5.5" fill="#5A4A52"/>
+      <circle cx="128" cy="96" r="5.5" fill="#5A4A52"/>
+      <circle cx="78" cy="105" r="7" fill="#F4C0D1" opacity="0.7"/>
+      <circle cx="142" cy="105" r="7" fill="#F4C0D1" opacity="0.7"/>
+      <path d="M97 113 Q110 122 123 113" stroke="#D4537E" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="88" y="145" width="44" height="34" rx="8" fill="#F4C0D1"/>
+      <path d="M88 152 h44" stroke="#FBEAF0" stroke-width="3"/>
+    </svg>
+  </div>
+  <div class="about-text">
+    <h2>A little corner of cozy</h2>
+    <p>Bambi Cafe started as a small dream: a pastel-pink hideaway where soft music plays, the chairs are squishy, and every drink comes with a doodle on top. Whether you're studying, catching up with friends, or just need a quiet moment, our door (and our hearts) are open.</p>
+    <div class="badge-row">
+      <span class="badge">✿ pastel everything</span>
+      <span class="badge">✿ photo corner</span>
+      <span class="badge">✿ free wifi</span>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <h2>From our menu</h2>
+  <p class="sub">tiny treats, big feelings</p>
+  <div class="menu-grid">
+
+    <div class="menu-card">
+      <svg class="icon" viewBox="0 0 100 100"><rect x="25" y="35" width="50" height="50" rx="10" fill="#F4C0D1"/><rect x="25" y="35" width="50" height="12" rx="6" fill="#ED93B1"/><ellipse cx="50" cy="35" rx="25" ry="7" fill="#FBEAF0"/><circle cx="40" cy="65" r="3" fill="#fff"/><circle cx="60" cy="70" r="3" fill="#fff"/><circle cx="50" cy="78" r="3" fill="#fff"/></svg>
+      <h3>Strawberry milk latte</h3>
+      <p class="price">$5.50</p>
+      <p>steamed milk, real strawberry syrup, whipped cream</p>
+    </div>
+
+    <div class="menu-card">
+      <svg class="icon" viewBox="0 0 100 100"><rect x="25" y="35" width="50" height="50" rx="10" fill="#CECBF6"/><rect x="25" y="35" width="50" height="12" rx="6" fill="#AFA9EC"/><ellipse cx="50" cy="35" rx="25" ry="7" fill="#EEEDFE"/><circle cx="50" cy="68" r="14" fill="#fff" opacity="0.6"/></svg>
+      <h3>Lavender honey tea</h3>
+      <p class="price">$4.80</p>
+      <p>calming lavender, local honey, soft floral notes</p>
+    </div>
+
+    <div class="menu-card">
+      <svg class="icon" viewBox="0 0 100 100"><rect x="25" y="35" width="50" height="50" rx="10" fill="#9FE1CB"/><rect x="25" y="35" width="50" height="12" rx="6" fill="#5DCAA5"/><ellipse cx="50" cy="35" rx="25" ry="7" fill="#E1F5EE"/><circle cx="38" cy="60" r="9" fill="#fff" opacity="0.5"/><circle cx="62" cy="72" r="6" fill="#fff" opacity="0.5"/></svg>
+      <h3>Matcha cloud frappe</h3>
+      <p class="price">$5.90</p>
+      <p>ceremonial matcha, oat milk, fluffy cream top</p>
+    </div>
+
+    <div class="menu-card">
+      <svg class="icon" viewBox="0 0 100 100"><circle cx="50" cy="55" r="28" fill="#FAC775"/><circle cx="50" cy="55" r="28" fill="none" stroke="#EF9F27" stroke-width="3"/><circle cx="40" cy="48" r="3" fill="#fff"/><circle cx="60" cy="48" r="3" fill="#fff"/><circle cx="50" cy="65" r="3" fill="#fff"/><circle cx="50" cy="30" r="6" fill="#F4C0D1"/></svg>
+      <h3>Honey butter croissant</h3>
+      <p class="price">$4.20</p>
+      <p>flaky, golden, drizzled with honey butter</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <h2>Cafe diaries</h2>
+  <p class="sub">little moments, framed with love</p>
+  <div class="gallery-grid">
+    <figure class="polaroid">
+      <div class="frame" style="background:#FBEAF0;">
+        <svg width="70%" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#fff"/><circle cx="38" cy="45" r="5" fill="#5A4A52"/><circle cx="62" cy="45" r="5" fill="#5A4A52"/><path d="M40 60 Q50 68 60 60" stroke="#D4537E" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="32" cy="55" r="6" fill="#F4C0D1" opacity="0.7"/><circle cx="68" cy="55" r="6" fill="#F4C0D1" opacity="0.7"/></svg>
+      </div>
+      <figcaption>morning brew ✦</figcaption>
+    </figure>
+    <figure class="polaroid">
+      <div class="frame" style="background:#EEEDFE;">
+        <svg width="70%" viewBox="0 0 100 100"><rect x="20" y="30" width="60" height="50" rx="8" fill="#fff"/><circle cx="35" cy="50" r="4" fill="#7F77DD"/><circle cx="65" cy="50" r="4" fill="#7F77DD"/><path d="M38 65 Q50 72 62 65" stroke="#D4537E" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="20" y="30" width="60" height="10" rx="4" fill="#CECBF6"/></svg>
+      </div>
+      <figcaption>shelf of cute</figcaption>
+    </figure>
+    <figure class="polaroid">
+      <div class="frame" style="background:#E1F5EE;">
+        <svg width="70%" viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="35" ry="30" fill="#fff"/><circle cx="40" cy="50" r="4" fill="#1D9E75"/><circle cx="60" cy="50" r="4" fill="#1D9E75"/><path d="M40 65 Q50 72 60 65" stroke="#D4537E" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="30" cy="58" r="5" fill="#9FE1CB"/><circle cx="70" cy="58" r="5" fill="#9FE1CB"/></svg>
+      </div>
+      <figcaption>window seat</figcaption>
+    </figure>
+    <figure class="polaroid">
+      <div class="frame" style="background:#FAEEDA;">
+        <svg width="70%" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#fff"/><circle cx="38" cy="45" r="5" fill="#854F0B"/><circle cx="62" cy="45" r="5" fill="#854F0B"/><path d="M40 60 Q50 68 60 60" stroke="#D4537E" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="32" cy="55" r="6" fill="#FAC775" opacity="0.7"/><circle cx="68" cy="55" r="6" fill="#FAC775" opacity="0.7"/></svg>
+      </div>
+      <figcaption>sunday treats</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="visit-info">
+    <h2>Come say hi</h2>
+    <div class="info-row">
+      <span class="ic">📍</span>
+      <p><span class="label">Address</span><br><span class="detail">12 Cherry Blossom Lane, Baddi, HP</span></p>
+    </div>
+    <div class="info-row">
+      <span class="ic">🕒</span>
+      <p><span class="label">Hours</span><br><span class="detail">Mon–Sun, 9am – 9pm</span></p>
+    </div>
+    <div class="info-row">
+      <span class="ic">✉️</span>
+      <p><span class="label">Contact</span><br><span class="detail">hello@bambicafe.com</span></p>
+    </div>
+    <div class="social-row">
+      <span class="social-pill">Instagram</span>
+      <span class="social-pill">TikTok</span>
+    </div>
+  </div>
+  <div class="map-box">map goes here ♡</div>
+</section>
+
+<footer>
+  <svg class="foot-chibi" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="46" fill="#FBEAF0"/>
+    <ellipse cx="35" cy="32" rx="8" ry="13" fill="#F4C0D1" transform="rotate(-20 35 32)"/>
+    <ellipse cx="65" cy="32" rx="8" ry="13" fill="#F4C0D1" transform="rotate(20 65 32)"/>
+    <circle cx="42" cy="52" r="3.5" fill="#5A4A52"/>
+    <circle cx="58" cy="52" r="3.5" fill="#5A4A52"/>
+    <path d="M44 64 Q50 70 56 64" stroke="#D4537E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div class="divider"></div>
+  <p>Bambi Cafe · made with ♡ and oat milk</p>
+  <p>© 2026 Bambi Cafe. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
